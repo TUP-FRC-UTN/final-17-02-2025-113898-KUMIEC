@@ -1,0 +1,72 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- SVG del personaje -->
+        <svg width="200" height="300" class="hangman-svg">
+          <!-- Base -->
+          <line x1="20" y1="280" x2="180" y2="280" stroke="black" />
+          <!-- Poste vertical -->
+          <line x1="40" y1="280" x2="40" y2="20" stroke="black" />
+          <!-- Poste horizontal -->
+          <line x1="40" y1="20" x2="150" y2="20" stroke="black" />
+          <!-- Cuerda -->
+          <line x1="150" y1="20" x2="150" y2="100" stroke="black" />
+          
+          <!-- Partes del cuerpo (se muestran según los errores) -->
+          <circle *ngIf="incorrectLetters.length >= 1" 
+                  cx="150" cy="120" r="20" fill="black" /> <!-- cabeza -->
+          <line *ngIf="incorrectLetters.length >= 2"
+                x1="150" y1="140" x2="150" y2="200" stroke="black" /> <!-- cuerpo -->
+          <line *ngIf="incorrectLetters.length >= 3"
+                x1="150" y1="150" x2="130" y2="180" stroke="black"/> <!-- brazo izquierdo -->
+          <line *ngIf="incorrectLetters.length >= 4"
+                x1="150" y1="150" x2="170" y2="180" stroke="black" /> <!-- brazo derecho -->
+          <line *ngIf="incorrectLetters.length >= 5"
+                x1="150" y1="200" x2="130" y2="240" stroke="black" /> <!-- pierna izquierda -->
+          <line *ngIf="incorrectLetters.length >= 6"
+                x1="150" y1="200" x2="170" y2="240" stroke="black" /> <!-- pierna derecha -->
+        </svg>
+      </div>
+  
+      <div class="col-md-6">
+        <!-- Palabra oculta -->
+        <div class="hidden-word mb-4">
+          <span *ngFor="let letter of hiddenWord" class="mx-1">{{ letter }}</span>
+        </div>
+  
+        <!-- Intentos restantes -->
+        <div class="attempts mb-4">
+          Intentos restantes: {{ remainingAttempts }}
+        </div>
+  
+        <!-- Letras incorrectas -->
+        <div class="wrong-letters mb-4">
+          Letras incorrectas: 
+          <span *ngFor="let letter of incorrectLetters" class="mx-1">{{ letter }}</span>
+        </div>
+  
+        <!-- Teclado virtual -->
+        <div class="virtual-keyboard">
+          <button *ngFor="let letter of keyboard"
+                  (click)="guessLetter(letter)"
+                  [disabled]="correctLetters.includes(letter) || 
+                             incorrectLetters.includes(letter) || 
+                             gameOver"
+                  class="btn btn-outline-primary m-1">
+            {{ letter }}
+          </button>
+        </div>
+  
+        <!-- Mensaje de fin de juego -->
+        <div *ngIf="gameOver" class="game-over mt-4">
+          <div class="alert" [ngClass]="isWinner ? 'alert-success' : 'alert-danger'">
+            <h4>{{ isWinner ? '¡Felicitaciones!' : '¡Game Over!' }}</h4>
+            <p>La palabra era: {{ word }}</p>
+            <button (click)="startNewGame()" class="btn btn-primary">
+              Jugar de nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

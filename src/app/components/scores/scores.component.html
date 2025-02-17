@@ -1,0 +1,26 @@
+<h2>Tabla de Scores</h2>
+<table *ngIf="isAdmin; else noAccess">
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>Palabra</th>
+      <th>Puntaje</th>
+      <th>Intentos restantes</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let score of scores">
+      <td>{{ score.playerName }}</td>
+      <td>{{ score.word }}</td>
+      <td>{{ score.score }}</td>
+      <td>{{ score.attemptsLeft }}</td>
+      <td>{{ score.date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noAccess>
+  <p>No tienes acceso a esta página.</p>
+</ng-template>
+

@@ -1,0 +1,51 @@
+/* game.component.scss */
+.hidden-word {
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
+    font-family: monospace;
+    text-align: center;
+  }
+  
+  .virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    
+    button {
+      width: 40px;
+      height: 40px;
+      font-weight: bold;
+      
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+  
+  .hangman-svg {
+    display: block;
+    margin: 0 auto;
+    
+    line {
+      stroke-width: 2;
+    }
+  }
+  
+  .wrong-letters {
+    font-size: 1.2rem;
+    color: #dc3545;
+  }
+  
+  .attempts {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .game-over {
+    text-align: center;
+    
+    .alert {
+      padding: 2rem;
+    }
+  }
